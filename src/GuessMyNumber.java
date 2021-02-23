@@ -2,10 +2,10 @@ import java.util.Random;
 import java.util.Scanner;
 //importing necessary classes. scanner takes user input and random is a random number generator
 public class GuessMyNumber {
-    int targetInt;
     static int[] retVals = new int[2];
-    public static int[] GameParameters( int targetInt) {
+    public static int[] GameParameters() {
         // sets the game parameters
+        int targetInt;
         Scanner sc = new Scanner(System.in);
         Random rd = new Random();
         System.out.println("what do you want the lowest number to be");
@@ -15,7 +15,7 @@ public class GuessMyNumber {
         targetInt = rd.nextInt(range);
         targetInt += min;
         int max = min + range;
-        int guesses = Math.toIntExact(Math.round(Math.log(range) / Math.log(2))); // most guesses needed using binary search algorithim
+        int guesses = Math.toIntExact(Math.round(Math.log(range) / Math.log(2))); // most guesses needed using binary search algorithm
         System.out.println("you have " + guesses + " guesses to find my number between " + min + " and " + max);
         int[] retVals = new int[2];
         retVals[0] = targetInt;
@@ -32,9 +32,8 @@ public class GuessMyNumber {
             System.out.println("you have " + guesses + " guesses left, please guess an integer in the range, you will be " +
                     "told if it is higher or lower then the target integer.\n");
             int playerGuess = sc.nextInt();
-            if (playerGuess == targetInt) {
-                win = "y";
-            } else {
+            if (playerGuess == targetInt) win = "y";
+            else {
                 win = "n";
             }
             guesses = guesses - 1;
@@ -46,17 +45,7 @@ public class GuessMyNumber {
                 System.out.println("???");
             }
         }
-        if(win.equals("y")) {
-            System.out.println("you won the game");
-        }
-        else if (win.equals("n") && guesses == 0){
-            System.out.println("you lost the game :)");
-            System.out.println("The number was " + targetInt);
-        } else {
-            System.out.println("try again");
-        }
 
-        System.out.println("The number was " + targetInt);
         return win;
     }
     public static void main(String[] args) {
@@ -64,10 +53,20 @@ public class GuessMyNumber {
         System.out.println("Do you want to play my game? y or n\n");
         String gameRequest = scan.next();
         while (gameRequest.equals("y")) {
-            int[] getTarget = GameParameters(0);
-            PlayGame(retVals);
+            int[] setParams = GameParameters();
+            String gameResult = PlayGame(setParams);
+            if(gameResult.equals("y")) {
+                System.out.println("you won the game");
+            }
+            else if (gameResult.equals("n") && setParams[1] == 0){
+                System.out.println("you lost the game :)");
+                System.out.println("The number was " + setParams[0]);
+            } else {
+                System.out.println("try again");
+            }
 
-            System.out.println("play agian? y or n\n");
+            System.out.println("The number was " + setParams[0]);
+            System.out.println("play again? y or n\n");
             gameRequest = scan.next();
 
         }
