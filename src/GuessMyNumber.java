@@ -15,7 +15,8 @@ public class GuessMyNumber {
         targetInt = rd.nextInt(range); // gets a random integer between 0 and ) + range
         targetInt += min; // adds min to make the integer within the range
         int max = min + range; //
-        int guesses = Math.toIntExact(Math.round(Math.log(range) / Math.log(2))); // most guesses needed using binary search algorithm
+        int guesses = Math.toIntExact(Math.round(Math.log(range) / Math.log(2))); // most guesses needed using binary
+        // search algorithm, used to establish number of guesses
         System.out.println("you have " + guesses + " guesses to find my number between " + min + " and " + max);
         int[] retVals = new int[2]; // array to get return values for the parameters
         retVals[0] = targetInt;
@@ -39,10 +40,8 @@ public class GuessMyNumber {
                 // tells user whether guess is higher or lower than target number
                 if (playerGuess > targetInt) {
                     System.out.println("too high");
-                } else if (targetInt > playerGuess) {
-                    System.out.println("too low");
                 } else {
-                    System.out.println("???");
+                    System.out.println("too low");
                 }
             }
         }
