@@ -56,15 +56,17 @@ public class GuessMyNumber {
                 "This game is designed to always be possible so guess carefully"); // intro message
         System.out.println("Do you want to play my game? y or n\n");
         String gameRequest = scan.next(); //get user input as a string
+        System.out.println("What is your name");
+        String name = scan.next();
         while (gameRequest.equals("y")) {
             int[] setParams = GameParameters(); // calls GameParameters to set params for the game
             String gameResult = PlayGame(setParams); // plays the game with said parameters
             // string returned from PlayGame is used to see if the user has won
             if(gameResult.equals("y")) {
-                System.out.println("you won the game and have achieved basic competency");
+                System.out.println("you won the game and have achieved basic competency\ngood job " + name + "!");
             }
             else if (gameResult.equals("n")){
-                System.out.println("you have failed in this simple game, do you even know how this works.");
+                System.out.println("you have failed in this simple game " + name + ", do you even know how this works.");
                 System.out.println("The number was " + setParams[0]); // tells user what the number was if they lost
             } else {
                 System.out.println("try again");
